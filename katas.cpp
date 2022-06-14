@@ -42,6 +42,7 @@ auto val_min(const std::vector<int>& vec)
 auto val_max(const std::vector<int>& vec)
 {
     return *(std::max_element(vec.begin(),vec.end()));
+    //return *std::max_element(std::begin(list), std::end(list)); }
     /*int currentMax = list[0];
         for (int i = 1; i < list.size(); i++) {
             if (list[i] > currentMax) {
