@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <memory>
 
 template <typename T>
 constexpr std::string_view type_name()
@@ -31,8 +32,18 @@ void func(T&& param){
 }
 
 
+auto func2() ->std::vector<int>{
+    return {0};
+}
+template <typename T>
+auto func3(T const& t, T const& u) -> decltype(t+u){
+    return t+u;
+}
+
 int main(){
-    auto&& x ={1,2,10};
+    //auto x = {1.0f,2.1f};
+    auto x = std::make_unique<int> (42);
+    //func(func3(1.0,2.0));
     func(x);
     return 0;
 }
