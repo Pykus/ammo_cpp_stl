@@ -42,8 +42,12 @@ auto func3(T const& t, T const& u) -> decltype(t+u){
 
 int main(){
     //auto x = {1.0f,2.1f};
-    auto x = std::make_unique<int> (42);
+    //auto x = std::make_unique<int> (42);
     //func(func3(1.0,2.0));
+    int c = 15;
+    const char  x[] = "agd";
+    const char* y = x;
     func(x);
+    func(y);
     return 0;
 }
