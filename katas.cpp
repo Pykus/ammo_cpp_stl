@@ -120,6 +120,13 @@ std::string howManyDalmatians(int number){
           number <= 50 ? dogs[1] :
           number == 101 ? dogs[3] :
                           dogs[2];
+    /*
+    switch(number){
+      case 1  ... 10: return "Hardly any";
+      case 11 ... 50: return "More than a handful!";
+      case 51 ... 100: return "Woah that's a lot of dogs!";
+      default: return "101 DALMATIONS!!!";
+    */
 };
 
 
@@ -150,7 +157,7 @@ int main(int argc, char **argv)
     EXPECT((std::vector<uint64_t>{1,2,4} == powers_of_two(2) ));
     EXPECT((std::vector<uint64_t>{1,2,4,8} == powers_of_two(3) ));
     };
-    TEST(Task_embedded_ternary_working){
+    TEST(Task_embedded_ternary_working){//instead of embeded ternary you can use switch-> check howManyDalmatioans definition comments
         EXPECT((howManyDalmatians(26)== std::string{"More than a handful!"}));
         EXPECT((howManyDalmatians(8)== std::string{"Hardly any"}));
         EXPECT((howManyDalmatians(14)== std::string{"More than a handful!"}));
