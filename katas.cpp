@@ -130,8 +130,22 @@ std::string howManyDalmatians(int number){
 };
 
 
+std::vector<int> reverse_range(const int& n)
+{
+    std::vector<int> result{};
+    for(auto i=0;i<=n;i++)
+        result.push_back(i);
+    //displayRange(result.begin(),result.end());
+    return result;
+};
+
 int main(int argc, char **argv)
 {
+    //reverse_range(5);
+    TEST(Task4_displayListFromNto0)
+    {
+        EXPECT(( reverse_range(5) == std::vector<int>{5,4,3,2,1} )); 
+    };
     TEST(Task3_splitNumberIntoDigits)
     {
         EXPECT((digitize(35231) == std::vector<int>{ 1,3,2,5,3})); //
@@ -143,13 +157,10 @@ int main(int argc, char **argv)
     EXPECT((val_min({42})== 42));
     
     };
-
     TEST(Task2_MaxFromList)
     {
     EXPECT((val_max({-52, 56, 30, 29, -54, 0, -110}) == 56));
     };
-
-
     TEST(Task1_PowersOfTwo)
     {
     EXPECT(( std::vector<uint64_t>{1} == powers_of_two(0) ));
