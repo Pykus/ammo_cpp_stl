@@ -41,5 +41,17 @@ void ForEach(const std::vector<int>& values, const std::function<void(int)>& fun
 	
 }
 
+template <typename T, size_t N>    //template to nie tylko T
+void func(const std::array<T, N>& arr)
+{
+    std::cout << std::size(arr);
+    /*
+    std::array arr{ 1, 2, 3, 4, 5 };
+    func(arr);
+    */
+}
+
+
+    
 
 
