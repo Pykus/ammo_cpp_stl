@@ -4,6 +4,7 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <functional>
 struct P
 {           
     int x;
@@ -27,13 +28,15 @@ auto[x,y,z] = func();
 
 
 
-void ForEach(const std::vector<int>& values, void(*func)(int))
+void ForEach(const std::vector<int>& values, const std::function<void(int)>& func)//void(*func)(int)
 {
 	for (int value :values)
 		func(value);
 /*
  * std::vector<int> values = {1,2,3,4,5};
- * ForEach(values, [](int value) { std::cout<< "Value: "<< value << std::endl;});
+    auto lambda = [](int value) { std::cout<< "Value: "<< value << std::endl;}
+
+ * ForEach(values, lambda);
  */
 	
 }
