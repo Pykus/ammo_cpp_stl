@@ -27,7 +27,7 @@ auto[x,y,z] = func();
 
 
 
-void ForEach(const std::vector<int>% values, void(*func)(int))
+void ForEach(const std::vector<int>& values, void(*func)(int))
 {
 	for (int value :values)
 		func(value);
