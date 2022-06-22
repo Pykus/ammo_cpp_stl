@@ -8,21 +8,17 @@
 #include <sstream>
 #include <iostream>
 struct TestCase { std::string name{}; std::ostringstream failures{}; };
-
 template <typename T> void operator | (TestCase& testCase, T&& testBody) {
     testBody(); auto failures = testCase.failures.str();
     if (failures.empty()) std::cout << testCase.name << ": SUCCESS\n";
     else std::cerr << testCase.name << ": FAILURE\n" << failures;
 }
-
 void addFailure(std::ostream& os, const char* file, unsigned line, const char* condition) {
     os << file << ":" << line << ": Failed: " << condition << "\n";
 }
 #define TEST(name) TestCase name{#name}; name | [&, &failures = name.failures]
 #define EXPECT(cond) if (cond) {} else addFailure(failures, __FILE__, __LINE__, #cond)
 #define ASSERT(cond) if (cond) {} else return addFailure(failures, __FILE__, __LINE__, #cond)
-
-
 
 using pp::displayRange;
 using pp::br;
@@ -133,18 +129,43 @@ std::string howManyDalmatians(int number){
 std::vector<int> reverse_range(const int& n)
 {
     std::vector<int> result{};
-    for(auto i=0;i<=n;i++)
+    for(int i=n;i>0;i--)
         result.push_back(i);
-    //displayRange(result.begin(),result.end());
+    //v2// while ( n ) result.push_back(n--);
+    //v3// std::generate(result.begin(), result.end(), [n]()mutable{ return n--; });
     return result;
 };
 
+auto countPositivesSumNegatives(const std::vector<int>& input)
+{
+    /*Return an array, where the first element is the count of positives
+     numbers and the second element is sum of negative numbers. 0 is neither positive nor negative.
+    //if(input.size()==0) return std::vector<int>{};
+    */
+    std::pair<int,int> ret{0,0};
+    for(const auto& elem : input)
+    {
+        elem>0 ? ret.first+=1 : ret.second+=elem;
+    }
+    return ret;//std::pair<int,int>{10,-65};
+}
+
+
 int main(int argc, char **argv)
 {
+    //auto res =countPositivesSumNegatives({1, -2, -2, 2});
+    //std::cout<<res.first<<" "<<res.second;
     //reverse_range(5);
+    TEST(countPositivesAndSumNegativesInVector)
+    {
+    EXPECT(( countPositivesSumNegatives({}) == std::pair<int,int>{} ));
+    EXPECT(( countPositivesSumNegatives({1, 2, 3, 4, 5, 6, 7, 8, 9, 10, -11, -12, -13, -14, -15}) == std::pair<int,int>{10, -65} ));
+    };
+    
     TEST(Task4_displayListFromNto0)
     {
         EXPECT(( reverse_range(5) == std::vector<int>{5,4,3,2,1} )); 
+        //EXPECT(( reverse_range(2) == std::vector<int>{2,1} ));
     };
     TEST(Task3_splitNumberIntoDigits)
     {
