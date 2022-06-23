@@ -67,9 +67,6 @@ auto val_max(const std::vector<int>& vec)
         }
     return currentMax;*/
 }
-
-
-
 std::vector<int> digitize(unsigned long n) 
 {        
     /* Task-3 split number into digits
@@ -98,7 +95,6 @@ Example(Input => Output):
     return result;
   
 };
-
 std::string howManyDalmatians(int number){
     /*
         Assert::That(howManyDalmatians(26), Equals("More than a handful!"));
@@ -124,8 +120,6 @@ std::string howManyDalmatians(int number){
       default: return "101 DALMATIONS!!!";
     */
 };
-
-
 std::vector<int> reverse_range(const int& n)
 {
     std::vector<int> result{};
@@ -135,7 +129,6 @@ std::vector<int> reverse_range(const int& n)
     //v3// std::generate(result.begin(), result.end(), [n]()mutable{ return n--; });
     return result;
 };
-
 auto countPositivesSumNegatives(const std::vector<int>& input)
 {
     /*Return an array, where the first element is the count of positives
@@ -149,24 +142,52 @@ auto countPositivesSumNegatives(const std::vector<int>& input)
     }
     return ret;//std::pair<int,int>{10,-65};
 }
-
+int sumOfDifferences(const std::vector<int>& arr) { //const & type was requirement
+    auto ar = arr;
+    /*
+    [2, 1, 10]  -->  9
+In descending order: [10, 2, 1]
+Sum: (10 - 2) + (2 - 1) = 8 + 1 = 9
+    */
+    std::sort(ar.begin(), ar.end(), std::greater<int>());
+    int ret = 0;
+    for (size_t i = 0; i < ar.size() - 1; i++) {
+        ret = ret + (ar[i] - ar[(i + 1)]);
+    };
+    return ret;//your code here
+}
 
 int main(int argc, char **argv)
 {
     //auto res =countPositivesSumNegatives({1, -2, -2, 2});
     //std::cout<<res.first<<" "<<res.second;
     //reverse_range(5);
+
+    TEST(Task5_sumOfDifferences)
+    {
+        EXPECT((sumOfDifferences({ 1,2,10 }) == 9));
+        EXPECT((sumOfDifferences({ -3,-2,-1 }) == 2));
+        EXPECT((sumOfDifferences({ 1,1,1,1 }) == 0));
+        EXPECT((sumOfDifferences({ -1 }) == 0));
+        EXPECT((sumOfDifferences({ 1 }) == 0));
+        EXPECT((sumOfDifferences({ -17,17 }) == 34));
+
+
+
+
+    };
+
     TEST(countPositivesAndSumNegativesInVector)
     {
     EXPECT(( countPositivesSumNegatives({}) == std::pair<int,int>{} ));
     EXPECT(( countPositivesSumNegatives({1, 2, 3, 4, 5, 6, 7, 8, 9, 10, -11, -12, -13, -14, -15}) == std::pair<int,int>{10, -65} ));
     };
-    
     TEST(Task4_displayListFromNto0)
     {
         EXPECT(( reverse_range(5) == std::vector<int>{5,4,3,2,1} )); 
         //EXPECT(( reverse_range(2) == std::vector<int>{2,1} ));
     };
+    /*comment some unused passed tests
     TEST(Task3_splitNumberIntoDigits)
     {
         EXPECT((digitize(35231) == std::vector<int>{ 1,3,2,5,3})); //
@@ -201,11 +222,12 @@ int main(int argc, char **argv)
     };
     //::testing::InitGoogleTest(&argc,argv);
     //return RUN_ALL_TESTS();
+    */
     return 0;
 }
 
 
-/*google test version of tests
+/*google test version of some tests
 TEST(Task2_MinFromList, ReturnMinValueFromList)
 {
     EXPECT_EQ((val_min({-52, 56, 30, 29, -54, 0, -110})) , -110);
