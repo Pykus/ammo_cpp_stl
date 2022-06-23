@@ -1,3 +1,6 @@
+#include "igloo_alt.h"us
+
+using namespace igloo;
 #include <iostream>
 #include <vector>
 #include <math.h>
@@ -220,8 +223,15 @@ int main(int argc, char **argv)
         EXPECT((howManyDalmatians(10)== std::string{"Hardly any"}));
         EXPECT((howManyDalmatians(101)== std::string{"101 DALMATIONS!!!"}));
     };
-    //::testing::InitGoogleTest(&argc,argv);
-    //return RUN_ALL_TESTS();
+
+
+    //
+    /*
+    ::testing::InitGoogleTest(&argc,argv);        // google test
+    return RUN_ALL_TESTS();
+    
+     return TestRunner::RunAllTests(argc, argv);  //igloo
+
     */
     return 0;
 }
