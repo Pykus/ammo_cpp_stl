@@ -1,5 +1,3 @@
-#include <igloo/igloo_alt.h>
-using namespace igloo;
 #include <iostream>
 #include <vector>
 #include <math.h>
