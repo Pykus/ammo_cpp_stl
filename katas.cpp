@@ -7,6 +7,8 @@
 #include <string>
 #include <sstream>
 #include <iostream>
+#include <iterator>
+#include <cctype> //toupper
 struct TestCase { std::string name{}; std::ostringstream failures{}; };
 template <typename T> void operator | (TestCase& testCase, T&& testBody) {
     testBody(); auto failures = testCase.failures.str();
@@ -157,11 +159,36 @@ Sum: (10 - 2) + (2 - 1) = 8 + 1 = 9
     return ret;//your code here
 }
 
+std::string to_camel_case(std::string text) {
+ 
+    std::string ret  {};
+    bool makeUpper = 0;
+    for(std::string::iterator it = text.begin(); it != text.end(); it++ ){
+        if( makeUpper) { ret.push_back(std::toupper(*it)); makeUpper = 0; } else { ret.push_back(*it);};
+        if( (*it == '-') or (*it == '_')) { makeUpper = 1; ret.pop_back();};          
+    };
+    return ret;
+};
+      
+  // TODO: Your code goes here!
+
+
 int main(int argc, char **argv)
 {
     //auto res =countPositivesSumNegatives({1, -2, -2, 2});
     //std::cout<<res.first<<" "<<res.second;
     //reverse_range(5);
+    auto test= to_camel_case("the_stealth_warrior");
+    displayRange(test.begin(), test.end());
+
+    TEST(Task6_CamelCase)
+    {
+        EXPECT(( to_camel_case("") == std::string{""} ));
+        EXPECT(( to_camel_case("the_stealth_warrior") == std::string{"theStealthWarrior"} ));
+        EXPECT(( to_camel_case("The-Stealth-Warrior") == std::string{"TheStealthWarrior"} ));
+        EXPECT(( to_camel_case("A-B-C") == std::string{"ABC"} ));
+
+    };
 
     TEST(Task5_sumOfDifferences)
     {
@@ -171,9 +198,6 @@ int main(int argc, char **argv)
         EXPECT((sumOfDifferences({ -1 }) == 0));
         EXPECT((sumOfDifferences({ 1 }) == 0));
         EXPECT((sumOfDifferences({ -17,17 }) == 34));
-
-
-
 
     };
 
@@ -231,6 +255,7 @@ int main(int argc, char **argv)
 
     */
     return 0;
+    //return TestRunner::RunAllTests(argc, argv); 
 }
 
 
